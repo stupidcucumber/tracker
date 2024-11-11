@@ -14,16 +14,25 @@ class AlexNetBackbone(Module):
 
     """
 
-    def __init__(self) -> None:
+    def __init__(self, conv_channels: tuple = (96, 192, 256, 384, 256)) -> None:
         super(AlexNetBackbone, self).__init__()
-
-        self.conv1 = LazyConv2d(out_channels=96, kernel_size=(11, 11), stride=2)
+        self.conv1 = LazyConv2d(
+            out_channels=conv_channels[0], kernel_size=(11, 11), stride=2
+        )
         self.pool1 = MaxPool2d(kernel_size=(3, 3), stride=2)
-        self.conv2 = LazyConv2d(out_channels=256, kernel_size=(5, 5), stride=1)
+        self.conv2 = LazyConv2d(
+            out_channels=conv_channels[1], kernel_size=(5, 5), stride=1
+        )
         self.pool2 = MaxPool2d(kernel_size=(3, 3), stride=2)
-        self.conv3 = LazyConv2d(out_channels=192, kernel_size=(3, 3), stride=1)
-        self.conv4 = LazyConv2d(out_channels=192, kernel_size=(3, 3), stride=1)
-        self.conv5 = LazyConv2d(out_channels=128, kernel_size=(3, 3), stride=1)
+        self.conv3 = LazyConv2d(
+            out_channels=conv_channels[2], kernel_size=(3, 3), stride=1
+        )
+        self.conv4 = LazyConv2d(
+            out_channels=conv_channels[3], kernel_size=(3, 3), stride=1
+        )
+        self.conv5 = LazyConv2d(
+            out_channels=conv_channels[4], kernel_size=(3, 3), stride=1
+        )
 
     def forward(self, x: Tensor) -> Tensor:
         x = self.conv1(x)
