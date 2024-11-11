@@ -1,0 +1,6 @@
+pre-commit
+torch
+numpy
+pandas
+tqdm
+opencv-python
