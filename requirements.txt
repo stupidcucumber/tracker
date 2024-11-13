@@ -4,3 +4,5 @@ numpy
 pandas
 tqdm
 opencv-python
+got10k
+albumentations
