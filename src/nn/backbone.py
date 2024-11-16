@@ -1,5 +1,6 @@
 from torch import Tensor
 from torch.nn import LazyConv2d, MaxPool2d, Module
+from torch.nn.functional import relu
 
 
 class AlexNetBackbone(Module):
@@ -36,9 +37,13 @@ class AlexNetBackbone(Module):
 
     def forward(self, x: Tensor) -> Tensor:
         x = self.conv1(x)
+        x = relu(x)
         x = self.pool1(x)
         x = self.conv2(x)
+        x = relu(x)
         x = self.pool2(x)
         x = self.conv3(x)
+        x = relu(x)
         x = self.conv4(x)
+        x = relu(x)
         return self.conv5(x)
